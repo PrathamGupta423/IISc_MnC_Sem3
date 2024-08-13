@@ -99,7 +99,41 @@ std::string subtract(const std::string& a, const std::string& b){
         j--;
     }
     std::reverse(result.begin(), result.end());
-    // result.erase(0, std::min(result.find_first_not_of('0'), result.size() - 1));
-    // return result.empty() ? "0" : result;
     return result;
 }
+
+bool Arbit::operator==(const Arbit& other) const {
+    return number == other.number && negative == other.negative;
+}
+
+Arbit Arbit::operator+(const Arbit& other) const {
+    if (negative == other.negative) {
+        Arbit result(string_add(number, other.number));
+        result.negative = negative;
+        return result;
+    } else {
+        int cmp = mod_compare(number, other.number);
+        if (cmp == 0) return Arbit();
+        if (cmp < 0) {
+            Arbit result(subtract(other.number, number));
+            result.negative = other.negative;
+            return result;
+        } else {
+            Arbit result(subtract(number, other.number));
+            result.negative = negative;
+            return result;
+        }
+    }
+}
+
+Arbit Arbit::operator-(const Arbit& other) const {
+    if (other == Arbit())
+    {
+        return *this;
+    }
+    
+    Arbit temp = other;
+    temp.negative = !temp.negative;
+    return *this + temp;
+}
+

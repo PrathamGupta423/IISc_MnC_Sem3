@@ -21,6 +21,13 @@ public:
     std::string toString() const;
     void print() const;
 
+    // Arithmetic operations
+    Arbit operator+(const Arbit& other) const;
+    Arbit operator-(const Arbit& other) const;
+
+    // Comparison operations
+    bool operator==(const Arbit& other) const;
+
 };
 
 int mod_compare(const std::string&, const std::string&);
