@@ -176,7 +176,7 @@ long long count_pairs_file(const std::string& filename) {
     std::getline(file, line);
     Arbit target(line);
 
-    target.print();
+    // target.print();
 
     std::getline(file, line);
     long long n = std::stoll(line);
@@ -188,9 +188,9 @@ long long count_pairs_file(const std::string& filename) {
 
     file.close();
 
-    for (int i = 0; i < numbers.size(); i++) {
-        numbers[i].print();
-    }
+    // for (int i = 0; i < numbers.size(); i++) {
+    //     numbers[i].print();
+    // }
 
     return count_pairs(numbers, target);
 }
