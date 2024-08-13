@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <iostream>
 #include <unordered_map>
+#include <fstream>
+
 
 Arbit::Arbit() : number("0"), negative(false) {}
 
@@ -157,4 +159,45 @@ long long count_pairs(const std::vector<Arbit>& numbers, const Arbit& target) {
         count[temp.toString()]++;
     }
     return result;
+}
+
+long long count_pairs_file(const std::string& filename) {
+    std::vector<Arbit> numbers;
+    std::ifstream file
+    {
+        filename
+    };
+    if (!file.is_open()) {
+        std::cerr << "Error opening file: " << filename << std::endl;
+        return -1;
+    }
+    std::string line;
+
+    std::getline(file, line);
+    Arbit target(line);
+
+    target.print();
+
+    std::getline(file, line);
+    long long n = std::stoll(line);
+
+    while (n--) {
+        std::getline(file, line);
+        numbers.push_back(Arbit(line));
+    }
+
+    file.close();
+
+    for (int i = 0; i < numbers.size(); i++) {
+        numbers[i].print();
+    }
+
+    return count_pairs(numbers, target);
+}
+
+
+extern "C" {
+    long long count_pairs_file_c(const char* filename) {
+        return count_pairs_file(filename);
+    }
 }

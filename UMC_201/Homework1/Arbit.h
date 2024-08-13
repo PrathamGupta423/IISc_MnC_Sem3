@@ -36,5 +36,6 @@ std::string string_add(const std::string&, const std::string&);
 std::string subtract(const std::string&, const std::string&);
 
 long long count_pairs(const std::vector<Arbit>&, const Arbit&);
+long long count_pairs_file(const std::string& filename);
 
 #endif // ARBIT_H
