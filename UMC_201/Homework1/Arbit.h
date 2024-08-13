@@ -5,6 +5,7 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
+#include <unordered_map>
 
 class Arbit {
 private:
@@ -33,5 +34,7 @@ public:
 int mod_compare(const std::string&, const std::string&);
 std::string string_add(const std::string&, const std::string&);
 std::string subtract(const std::string&, const std::string&);
+
+long long count_pairs(const std::vector<Arbit>&, const Arbit&);
 
 #endif // ARBIT_H

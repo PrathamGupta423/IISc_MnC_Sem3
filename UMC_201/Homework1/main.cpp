@@ -130,6 +130,34 @@ int main() {
     std::cout << "999 - -1000 = "; diff.print();
     diff = Arbit("1000") - Arbit("-0");
     std::cout << "1000 - -0 = "; diff.print();
-        
+
+
+    std::cout<<"--------------------------------"<<std::endl;
+
+    // Test Comparison
+    std::cout << "123 == 123: " << (Arbit("123") == Arbit("123")) << std::endl;
+    std::cout << "123 == 124: " << (Arbit("123") == Arbit("124")) << std::endl;
+    std::cout << "-123 == 123: " << (Arbit("-123") == Arbit("123")) << std::endl;
+    std::cout << "123 == -123: " << (Arbit("123") == Arbit("-123")) << std::endl;
+    std::cout << "-123 == -123: " << (Arbit("-123") == Arbit("-123")) << std::endl;
+    std::cout << "123 == 0123: " << (Arbit("123") == Arbit("0123")) << std::endl;
+    std::cout << "123 == 000123: " << (Arbit("123") == Arbit("000123")) << std::endl;
+    std::cout << "123 == 0001234: " << (Arbit("123") == Arbit("0001234")) << std::endl;
+    std::cout<<"--------------------------------"<<std::endl;
+
+    // Test Count_Pairs
+    std::vector<Arbit> numbers2;
+    numbers2.push_back(Arbit("123456789123456789"));
+    numbers2.push_back(Arbit("123456789123456788"));
+    numbers2.push_back(Arbit("123456789123456787"));
+
+
+
+    Arbit target("1");
+
+    std::cout << count_pairs(numbers2, target) << std::endl;
+
+
+
     return 0;
 }

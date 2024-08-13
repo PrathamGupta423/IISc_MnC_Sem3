@@ -1,4 +1,8 @@
 #include "Arbit.h"
+#include <vector>
+#include <algorithm>
+#include <iostream>
+#include <unordered_map>
 
 Arbit::Arbit() : number("0"), negative(false) {}
 
@@ -137,3 +141,20 @@ Arbit Arbit::operator-(const Arbit& other) const {
     return *this + temp;
 }
 
+long long count_pairs(const std::vector<Arbit>& numbers, const Arbit& target) {
+    std::unordered_map<std::string, long long> count;
+    long long result = 0;
+
+    Arbit temp = numbers[0];
+    temp = temp - target;
+    count[temp.toString()]++;
+
+    for (int i = 1; i < numbers.size(); i++) {
+        temp = numbers[i];
+        int num_count = count[temp.toString()];
+        result += num_count;
+        temp = temp - target;
+        count[temp.toString()]++;
+    }
+    return result;
+}
