@@ -49,7 +49,28 @@ int main() {
 
     std::cout<<"--------------------------------"<<std::endl;
 
+    // Test String Add
+    std::cout << string_add("123", "123") << std::endl;
+    std::cout << string_add("123", "124") << std::endl;
+    std::cout << string_add("124", "123") << std::endl;
+    std::cout << string_add("123", "1234") << std::endl;
+    std::cout << string_add("1234", "123") << std::endl;
+    std::cout << string_add("1234", "1235") << std::endl;
+    std::cout << string_add("323", "1234") << std::endl;
+    std::cout << string_add("123", "323") << std::endl;
 
+    std::cout<<"--------------------------------"<<std::endl;
+
+    // Test Subtract
+    std::cout << subtract("123", "123") << std::endl;
+    std::cout << subtract("123", "124") << std::endl;
+    std::cout << subtract("124", "123") << std::endl;
+    std::cout << subtract("123", "1234") << std::endl;
+    std::cout << subtract("1234", "123") << std::endl;
+    std::cout << subtract("1234", "1235") << std::endl;
+    std::cout << subtract("323", "1234") << std::endl;
+    std::cout << subtract("123", "323") << std::endl;
+    
 
 
     return 0;

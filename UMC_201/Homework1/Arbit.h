@@ -24,5 +24,7 @@ public:
 };
 
 int mod_compare(const std::string&, const std::string&);
+std::string string_add(const std::string&, const std::string&);
+std::string subtract(const std::string&, const std::string&);
 
 #endif // ARBIT_H
