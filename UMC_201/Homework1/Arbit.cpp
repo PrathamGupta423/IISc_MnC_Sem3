@@ -37,3 +37,16 @@ std::string Arbit::toString() const {
 void Arbit::print() const {
     std::cout << toString() << std::endl;
 }
+
+// Mod Compare
+int mod_compare(const std::string& a, const std::string& b) {
+    if (a.size() != b.size()) {
+        return a.size() < b.size() ? -1 : 1;
+    }
+    for (int i = 0; i < a.size(); i++) {
+        if (a[i] != b[i]) {
+            return a[i] < b[i] ? -1 : 1;
+        }
+    }
+    return 0;
+}

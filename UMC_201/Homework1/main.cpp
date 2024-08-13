@@ -13,6 +13,7 @@ int main() {
     std::cout << "b = "; b.print();
     std::cout << "c = "; c.print();
 
+    std::cout<<"--------------------------------"<<std::endl;
 
     // Big Test Constructor and Print
     std::vector<Arbit> numbers;
@@ -33,6 +34,23 @@ int main() {
     {
         numbers[i].print();
     }
+
+    std::cout<<"--------------------------------"<<std::endl;
     
+    // Test Mod Compare
+    std::cout << mod_compare("123", "123") << std::endl;
+    std::cout << mod_compare("123", "124") << std::endl;
+    std::cout << mod_compare("124", "123") << std::endl;
+    std::cout << mod_compare("123", "1234") << std::endl;
+    std::cout << mod_compare("1234", "123") << std::endl;
+    std::cout << mod_compare("1234", "1235") << std::endl;
+    std::cout << mod_compare("323", "1234") << std::endl;
+    std::cout << mod_compare("123", "323") << std::endl;
+
+    std::cout<<"--------------------------------"<<std::endl;
+
+
+
+
     return 0;
 }

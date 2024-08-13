@@ -23,4 +23,6 @@ public:
 
 };
 
+int mod_compare(const std::string&, const std::string&);
+
 #endif // ARBIT_H
