@@ -3,7 +3,7 @@ from count_pairs import test_c_implementation as test_c
 import sys
 import csv
 import random
-
+import os
 
 
 def make_file(i):
@@ -52,9 +52,21 @@ if __name__ == "__main__":
             py, py_time = test_python(filename)
             c, c_time = test_c(filename)
             assert py == c
-            results_file.write(f"{i*100}, {target} ,{py},{py_time},{c},{c_time}\n")
+            results_file.write(f"{i*100}, {target},{py},{py_time},{c},{c_time}\n")
             print(f"Test {i} completed")
     print("All tests passed")
+
+    #only cpp
+    # with open('results_cpp.csv', mode='w') as results_file:
+    #     for i in range(start, end + 1):
+
+            
+    #         filename , target = make_file(i)
+    #         print(f"Running test {i}")
+    #         c, c_time = test_c(filename)
+    #         results_file.write(f"{i*10000}, {target},{c},{c_time}\n")
+    #         print(f"Test {i} completed")
+    #         os.remove(filename)
 
 
 
