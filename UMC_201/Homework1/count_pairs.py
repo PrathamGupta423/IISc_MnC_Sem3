@@ -31,16 +31,10 @@ def count_pairs(data: list[int], target: int) -> int:
     """
     result = 0
     n = len(data)
-    completion = 0
-    total = n * (n - 1) / 2
     for i in range(n - 1):
         for j in range(i + 1, n):
-            completion += 1
             if data[i] - data[j] == target:
-                result += 1 
-        print(f"Completion: {completion / total * 100:.2f}%") # Print progress 
-
-            
+                result += 1     
     return result
 
 
@@ -55,24 +49,4 @@ def test_count_pairs():
 
 
 def count_pairs_file(filename: str) -> int:
-
-
-    # Temporary Code for testing
-    start_python = time.time()
-    data, target = read_file(filename)
-    py =  count_pairs(data, target)
-    end_python = time.time()
-    print(f"Python time with logging: {end_python - start_python}")
-
-    start_c = time.time()
-    c = lib.count_pairs_file_c(filename.encode('utf-8'))
-    end_c = time.time()
-    print(f"C time: {end_c - start_c}")
-
-    assert py == c
-
-    return c
-    #
-
-    #Final Code
-    #return lib.count_pairs_file_c(filename.encode('utf-8'))
+    return lib.count_pairs_file_c(filename.encode('utf-8'))
