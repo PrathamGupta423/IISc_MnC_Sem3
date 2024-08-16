@@ -29,6 +29,8 @@ int main() {
     numbers.push_back(Arbit("9999999999999999999999999999999999999999999999999999999999999999999999999999"));
     numbers.push_back(Arbit("-111111111111111111111111111111111111111111111111111111111111111111111111111111111111"));
     numbers.push_back(Arbit("101001a111"));
+    numbers.push_back(Arbit("123456789123456788"));
+    numbers.push_back(Arbit("123456789123456788"));
 
     for (int i = 0; i < numbers.size(); i++)
     {
@@ -170,24 +172,36 @@ int main() {
 
     // Testing the Output_Values class
     Output_Values out;
-    std::cout << out.toString() << std::endl;
+    std::cout << out.to_String() << std::endl;
     out += 1;
-    std::cout << out.toString() << std::endl;
+    std::cout << out.to_String() << std::endl;
     out += 100000000000000000;
-    std::cout << out.toString() << std::endl;
+    std::cout << out.to_String() << std::endl;
     out += 2;
-    std::cout << out.toString() << std::endl;
+    std::cout << out.to_String() << std::endl;
     out += 3;
-    std::cout << out.toString() << std::endl;
+    std::cout << out.to_String() << std::endl;
     out += 4;
-    std::cout << out.toString() << std::endl;
+    std::cout << out.to_String() << std::endl;
     out += 500000000000000000;
-    std::cout << out.toString() << std::endl;
+    std::cout << out.to_String() << std::endl;
 
     for(int i = 0; i < 10; i++){
         out += 123456789000000000;
-        std::cout << out.toString() << std::endl;
+        std::cout << out.to_String() << std::endl;
     }
+
+    std::cout<<"--------------------------------"<<std::endl;
+
+    out += 9223372036854775807;
+    std::cout << out.to_String() << std::endl;
+
+    out += 9223372036854775807;
+    std::cout << out.to_String() << std::endl;
+
+    out += 9223372036854775807;
+    std::cout << out.to_String() << std::endl;
+
 
     return 0;
 }

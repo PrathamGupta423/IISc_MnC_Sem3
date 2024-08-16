@@ -52,9 +52,6 @@ Arbit::Arbit(const std::string& num) {
             //raise ValueError
             // I don't expect this to happen on any of the test cases because python throws exception when the string is not a valid representation of a number. 
             // So I will just set the number to 0.
-            negative = false;
-            number = "0";
-            return;
         }
                 
     }
@@ -88,7 +85,7 @@ void Output_Values::operator+=(const long long other) {
     second %= 100000000000000000;
 }
 
-std::string Output_Values::toString() const {
+std::string Output_Values::to_String() const {
     std::string result;
     if (first > 0) {
         result += std::to_string(first);
@@ -213,9 +210,9 @@ Arbit Arbit::operator-(const Arbit& other) const {
     return *this + temp;
 }
 
-long long count_pairs(const std::vector<Arbit>& numbers, const Arbit& target) {
+std::string count_pairs(const std::vector<Arbit>& numbers, const Arbit& target) {
     std::unordered_map<std::string, long long> count;
-    long long result = 0;
+    Output_Values result;
 
     Arbit temp = numbers[0];
     temp = temp - target;
@@ -228,10 +225,10 @@ long long count_pairs(const std::vector<Arbit>& numbers, const Arbit& target) {
         temp = temp - target;
         count[temp.toString()]++;
     }
-    return result;
+    return result.to_String();
 }
 
-long long count_pairs_file(const std::string& filename) {
+std::string count_pairs_file(const std::string& filename) {
     // std::vector<Arbit> numbers;
     std::ifstream file
     {
@@ -239,7 +236,7 @@ long long count_pairs_file(const std::string& filename) {
     };
     if (!file.is_open()) {
         std::cerr << "Error opening file: " << filename << std::endl;
-        return -1;
+        return "error";
     }
     std::string line;
 
@@ -249,11 +246,11 @@ long long count_pairs_file(const std::string& filename) {
     std::getline(file, line);
     long long n = std::stoll(line);
 
-    long long result = 0;
+    Output_Values result;
     std::unordered_map<std::string, long long> count;
 
     if(n <= 1){
-        return 0;
+        return "0";
     }
 
     std::getline(file, line);
@@ -261,7 +258,6 @@ long long count_pairs_file(const std::string& filename) {
     temp = temp - target;
     count[temp.toString()]++;
     
-
     for (long long i = 1; i < n; i++) {
         std::getline(file, line);
         Arbit temp(line);
@@ -273,7 +269,7 @@ long long count_pairs_file(const std::string& filename) {
 
     file.close();
 
-    return result;
+    return result.to_String();
 }
 
 void test_count_pairs(){
@@ -282,7 +278,7 @@ void test_count_pairs(){
     std::vector<Arbit> input_list_1 = {Arbit("1"), Arbit("2"), Arbit("3"), Arbit("4"), Arbit("5")};
     Arbit target1("1");
 
-    if(count_pairs(input_list_1, target1) != 0){
+    if(count_pairs(input_list_1, target1) != "0"){
         std::cerr << "Test 1 failed" << std::endl;
         return;
     }
@@ -290,7 +286,7 @@ void test_count_pairs(){
     std::vector<Arbit> input_list_2 = {Arbit("5"), Arbit("4"), Arbit("3"), Arbit("2"), Arbit("1")};
     Arbit target2("1");
 
-    if(count_pairs(input_list_2, target2) != 4){
+    if(count_pairs(input_list_2, target2) != "4"){
         std::cerr << "Test 2 failed" << std::endl;
         return;
     }
@@ -298,7 +294,7 @@ void test_count_pairs(){
     std::vector<Arbit> input_list_3 = {Arbit("1"), Arbit("2"), Arbit("3"), Arbit("4"), Arbit("5")};
     Arbit target3("-3");
 
-    if(count_pairs(input_list_3, target3) != 2){
+    if(count_pairs(input_list_3, target3) != "2"){
         std::cerr << "Test 3 failed" << std::endl;
         return;
     }
@@ -307,7 +303,7 @@ void test_count_pairs(){
     std::vector<Arbit> input_list_4 = {Arbit("100000000000000000002"), Arbit("100000000000000000001"), Arbit("100000000000000000000")};
     Arbit target4("1");
 
-    if(count_pairs(input_list_4, target4) != 2){
+    if(count_pairs(input_list_4, target4) != "2"){
         std::cerr << "Test 4 failed" << std::endl;
         return;
     }
@@ -317,7 +313,7 @@ void test_count_pairs(){
 }
 
 extern "C" {
-    long long count_pairs_file_c(const char* filename) {
+    std::string count_pairs_file_c(const char* filename) {
         return count_pairs_file(filename);
     }
 }
