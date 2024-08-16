@@ -242,6 +242,46 @@ long long count_pairs_file(const std::string& filename) {
     return result;
 }
 
+void test_count_pairs(){
+    // Simple correctness tests
+
+    std::vector<Arbit> input_list_1 = {Arbit("1"), Arbit("2"), Arbit("3"), Arbit("4"), Arbit("5")};
+    Arbit target1("1");
+
+    if(count_pairs(input_list_1, target1) != 0){
+        std::cerr << "Test 1 failed" << std::endl;
+        return;
+    }
+
+    std::vector<Arbit> input_list_2 = {Arbit("5"), Arbit("4"), Arbit("3"), Arbit("2"), Arbit("1")};
+    Arbit target2("1");
+
+    if(count_pairs(input_list_2, target2) != 4){
+        std::cerr << "Test 2 failed" << std::endl;
+        return;
+    }
+
+    std::vector<Arbit> input_list_3 = {Arbit("1"), Arbit("2"), Arbit("3"), Arbit("4"), Arbit("5")};
+    Arbit target3("-3");
+
+    if(count_pairs(input_list_3, target3) != 2){
+        std::cerr << "Test 3 failed" << std::endl;
+        return;
+    }
+
+    // Test with huge integers
+    std::vector<Arbit> input_list_4 = {Arbit("100000000000000000002"), Arbit("100000000000000000001"), Arbit("100000000000000000000")};
+    Arbit target4("1");
+
+    if(count_pairs(input_list_4, target4) != 2){
+        std::cerr << "Test 4 failed" << std::endl;
+        return;
+    }
+
+    std::cout << "All tests passed" << std::endl;
+
+}
+
 
 extern "C" {
     long long count_pairs_file_c(const char* filename) {

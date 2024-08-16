@@ -161,7 +161,12 @@ int main() {
 
     // Test Count_Pairs_File
     std::cout << count_pairs_file("inputs.txt") << std::endl;
-    
+
+    std::cout<<"--------------------------------"<<std::endl;
+
+    // Test Test_Count_Pairs
+    std::cout << "Testing count_pairs" << std::endl;
+    test_count_pairs();    
 
     return 0;
 }
