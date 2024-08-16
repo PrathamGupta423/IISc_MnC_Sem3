@@ -12,9 +12,23 @@ Arbit::Arbit(const std::string& num) {
 
     long n = num.size();
     long i = 0;
+    if(n == 0){
+        //raise ValueError
+        negative = false;
+        number = "0";
+        return;
+    }
     negative = false;
+    while (i < n && num[i] == ' ')
+    {
+        i++;
+    }
+    
     if (num[0] == '-') {
         negative = true;
+        i++;
+    }
+    if(num[0] == '+'){
         i++;
     }
     while (i < n && num[i] == '0') {
@@ -29,6 +43,13 @@ Arbit::Arbit(const std::string& num) {
             i++;
         }        
     }
+    // When a interger is read in python from string:
+    // 1. If the string is empty, Python will raise a ValueError. 
+    // 2. If the string is not a valid representation of a number, Python will raise a ValueError.
+    // 3. trailing whitespaces are removed from the string.
+    // 4. leading whitespaces are removed from the string.
+
+
 
 }
 
@@ -49,7 +70,7 @@ int mod_compare(const std::string& a, const std::string& b) {
     if (a.size() != b.size()) {
         return a.size() < b.size() ? -1 : 1;
     }
-    for (int i = 0; i < a.size(); i++) {
+    for (long long i = 0; i < a.size(); i++) {
         if (a[i] != b[i]) {
             return a[i] < b[i] ? -1 : 1;
         }
@@ -61,8 +82,8 @@ int mod_compare(const std::string& a, const std::string& b) {
 std::string string_add(const std::string& a, const std::string& b) {
     std::string result;
     int carry = 0;
-    int i = a.size() - 1;
-    int j = b.size() - 1;
+    long long i = a.size() - 1;
+    long long j = b.size() - 1;
     while (i >= 0 || j >= 0 || carry) {
         if (i >= 0) {
             carry += a[i] - '0';
@@ -89,8 +110,8 @@ std::string subtract(const std::string& a, const std::string& b){
     
     std::string result;
     int borrow = 0;
-    int i = a.length() - 1;
-    int j = b.length() - 1;
+    long long i = a.length() - 1;
+    long long j = b.length() - 1;
     while (i >= 0) {
         int diff = (a[i] - '0') - borrow;
         if (j >= 0) diff -= (b[j] - '0');
@@ -151,9 +172,9 @@ long long count_pairs(const std::vector<Arbit>& numbers, const Arbit& target) {
     temp = temp - target;
     count[temp.toString()]++;
 
-    for (int i = 1; i < numbers.size(); i++) {
+    for (long long i = 1; i < numbers.size(); i++) {
         temp = numbers[i];
-        int num_count = count[temp.toString()];
+        long long num_count = count[temp.toString()];
         result += num_count;
         temp = temp - target;
         count[temp.toString()]++;
