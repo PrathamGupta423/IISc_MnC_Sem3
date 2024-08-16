@@ -168,5 +168,26 @@ int main() {
     std::cout << "Testing count_pairs" << std::endl;
     test_count_pairs();    
 
+    // Testing the Output_Values class
+    Output_Values out;
+    std::cout << out.toString() << std::endl;
+    out += 1;
+    std::cout << out.toString() << std::endl;
+    out += 100000000000000000;
+    std::cout << out.toString() << std::endl;
+    out += 2;
+    std::cout << out.toString() << std::endl;
+    out += 3;
+    std::cout << out.toString() << std::endl;
+    out += 4;
+    std::cout << out.toString() << std::endl;
+    out += 500000000000000000;
+    std::cout << out.toString() << std::endl;
+
+    for(int i = 0; i < 10; i++){
+        out += 123456789000000000;
+        std::cout << out.toString() << std::endl;
+    }
+
     return 0;
 }

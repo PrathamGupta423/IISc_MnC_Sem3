@@ -31,6 +31,19 @@ public:
 
 };
 
+class Output_Values {
+    private:
+        long long first;
+        long long second;
+
+    public:
+        Output_Values();
+
+        void operator+=(const long long other);
+        std::string toString() const;
+};
+
+
 int mod_compare(const std::string&, const std::string&);
 std::string string_add(const std::string&, const std::string&);
 std::string subtract(const std::string&, const std::string&);
@@ -38,5 +51,6 @@ std::string subtract(const std::string&, const std::string&);
 long long count_pairs(const std::vector<Arbit>&, const Arbit&);
 long long count_pairs_file(const std::string& filename);
 void test_count_pairs();
+
 
 #endif // ARBIT_H

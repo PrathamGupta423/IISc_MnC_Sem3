@@ -70,6 +70,40 @@ Arbit::Arbit(const std::string& num) {
 
 Arbit::Arbit(long long num) : Arbit(std::to_string(num)) {}
 
+Output_Values::Output_Values() : first(0), second(0) {}
+
+
+void Output_Values::operator+=(const long long other) {
+    // We want to store a big interger in base 10^17 using two long longs.
+    // We will store the first 17 digits in the first long long and the rest in the second long long.
+    // We will add the two numbers and if the second long long is greater than 10^17, we will add the carry to the first long long.
+
+    int carry = 0;
+    carry += other/100000000000000000;
+    second += other%100000000000000000;
+    if (second >= 100000000000000000) {
+        carry += 1;
+    }
+    first += carry;
+    second %= 100000000000000000;
+}
+
+std::string Output_Values::toString() const {
+    std::string result;
+    if (first > 0) {
+        result += std::to_string(first);
+        std::string second_str = std::to_string(second);
+        result += std::string(17 - second_str.size(), '0') + second_str;
+        return result;
+    }
+    if (second > 0) {
+        result += std::to_string(second);
+        return result;
+    }
+    return "0";
+    
+}
+
 std::string Arbit::toString() const {
     if (number == "0") return "0";
     if(negative) return "-" + number;
@@ -198,7 +232,7 @@ long long count_pairs(const std::vector<Arbit>& numbers, const Arbit& target) {
 }
 
 long long count_pairs_file(const std::string& filename) {
-    std::vector<Arbit> numbers;
+    // std::vector<Arbit> numbers;
     std::ifstream file
     {
         filename
@@ -281,7 +315,6 @@ void test_count_pairs(){
     std::cout << "All tests passed" << std::endl;
 
 }
-
 
 extern "C" {
     long long count_pairs_file_c(const char* filename) {
