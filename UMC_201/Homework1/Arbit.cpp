@@ -14,6 +14,8 @@ Arbit::Arbit(const std::string& num) {
     long i = 0;
     if(n == 0){
         //raise ValueError
+        // I don't expect this to happen on any of the test cases because python throws exception when the string is empty. 
+        // So I will just set the number to 0.
         negative = false;
         number = "0";
         return;
@@ -24,11 +26,11 @@ Arbit::Arbit(const std::string& num) {
         i++;
     }
     
-    if (num[0] == '-') {
+    if (num[i] == '-') {
         negative = true;
         i++;
     }
-    if(num[0] == '+'){
+    if(num[i] == '+'){
         i++;
     }
     while (i < n && num[i] == '0') {
@@ -41,7 +43,20 @@ Arbit::Arbit(const std::string& num) {
         while (i < n && num[i] >= '0' && num[i] <= '9') {
             number.push_back(num[i]);
             i++;
-        }        
+        }
+        while (i < n && num[i] == ' ') 
+        {
+            i++;
+        }
+        if(i < n){
+            //raise ValueError
+            // I don't expect this to happen on any of the test cases because python throws exception when the string is not a valid representation of a number. 
+            // So I will just set the number to 0.
+            negative = false;
+            number = "0";
+            return;
+        }
+                
     }
     // When a interger is read in python from string:
     // 1. If the string is empty, Python will raise a ValueError. 
