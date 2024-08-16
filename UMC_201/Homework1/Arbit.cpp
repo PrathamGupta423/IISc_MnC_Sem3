@@ -212,23 +212,34 @@ long long count_pairs_file(const std::string& filename) {
     std::getline(file, line);
     Arbit target(line);
 
-    // target.print();
-
     std::getline(file, line);
     long long n = std::stoll(line);
 
-    while (n--) {
+    long long result = 0;
+    std::unordered_map<std::string, long long> count;
+
+    if(n <= 1){
+        return 0;
+    }
+
+    std::getline(file, line);
+    Arbit temp(line);
+    temp = temp - target;
+    count[temp.toString()]++;
+    
+
+    for (long long i = 1; i < n; i++) {
         std::getline(file, line);
-        numbers.push_back(Arbit(line));
+        Arbit temp(line);
+        long long num_count = count[temp.toString()];
+        result += num_count;
+        temp = temp - target;
+        count[temp.toString()]++;
     }
 
     file.close();
 
-    // for (int i = 0; i < numbers.size(); i++) {
-    //     numbers[i].print();
-    // }
-
-    return count_pairs(numbers, target);
+    return result;
 }
 
 
