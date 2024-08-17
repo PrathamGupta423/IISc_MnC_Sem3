@@ -12,15 +12,14 @@ Arbit::Arbit(const std::string& num) {
 
     long n = num.size();
     long i = 0;
+    negative = false;
     if(n == 0){
         //raise ValueError
         // I don't expect this to happen on any of the test cases because python throws exception when the string is empty. 
         // So I will just set the number to 0.
-        negative = false;
         number = "0";
         return;
     }
-    negative = false;
     while (i < n && num[i] == ' ')
     {
         i++;
@@ -30,13 +29,13 @@ Arbit::Arbit(const std::string& num) {
         negative = true;
         i++;
     }
-    if(num[i] == '+'){
+    else if(num[i] == '+' ){
         i++;
     }
     while (i < n && num[i] == '0') {
         i++;
     }
-    if (i == n) {
+    if (i == n || (num[i] < '0' || num[i] > '9')) {
         number = "0";
         negative = false;
     } else {
@@ -48,10 +47,13 @@ Arbit::Arbit(const std::string& num) {
         {
             i++;
         }
-        if(i < n){
+        if(number.size() == 0){
             //raise ValueError
             // I don't expect this to happen on any of the test cases because python throws exception when the string is not a valid representation of a number. 
             // So I will just set the number to 0.
+            number = "0";
+            negative = false;
+            return;
         }
                 
     }
@@ -148,11 +150,11 @@ std::string string_add(const std::string& a, const std::string& b) {
 
 std::string subtract(const std::string& a, const std::string& b){
     
-    int cmp = mod_compare(a, b);
-    if (cmp == 0) return "0";
-    if (cmp < 0) {
-        return "-" + subtract(b, a);
-    }
+    // int cmp = mod_compare(a, b);
+    // if (cmp == 0) return "0";
+    // if (cmp < 0) {
+    //     return "-" + subtract(b, a);
+    // }
     
     std::string result;
     int borrow = 0;
@@ -242,6 +244,7 @@ std::string count_pairs_file(const std::string& filename) {
 
     std::getline(file, line);
     Arbit target(line);
+    std::cout << "target: " << target.toString() << std::endl;    
 
     std::getline(file, line);
     long long n = std::stoll(line);
@@ -255,13 +258,20 @@ std::string count_pairs_file(const std::string& filename) {
 
     std::getline(file, line);
     Arbit temp(line);
+    std::cout << "temp: " << temp.toString() << std::endl;
+
     temp = temp - target;
     count[temp.toString()]++;
+    std::cout << "temp: " << temp.toString() << std::endl;
+    std::cout << "count[temp.toString()]: " << count[temp.toString()] << std::endl;
     
     for (long long i = 1; i < n; i++) {
         std::getline(file, line);
+        std::cout << "line: " << line << std::endl;
         Arbit temp(line);
+        std::cout << "temp: " << temp.toString() << std::endl;
         long long num_count = count[temp.toString()];
+        std::cout << "num_count: " << num_count << std::endl;
         result += num_count;
         temp = temp - target;
         count[temp.toString()]++;
