@@ -35,7 +35,7 @@ Arbit::Arbit(const std::string& num) {
     while (i < n && num[i] == '0') {
         i++;
     }
-    if (i == n || (num[i] < '0' || num[i] > '9')) {
+    if (i == n) {
         number = "0";
         negative = false;
     } else {
@@ -244,7 +244,7 @@ std::string count_pairs_file(const std::string& filename) {
 
     std::getline(file, line);
     Arbit target(line);
-    std::cout << "target: " << target.toString() << std::endl;    
+    // std::cout << "target: " << target.toString() << std::endl;    
 
     std::getline(file, line);
     long long n = std::stoll(line);
@@ -258,20 +258,20 @@ std::string count_pairs_file(const std::string& filename) {
 
     std::getline(file, line);
     Arbit temp(line);
-    std::cout << "temp: " << temp.toString() << std::endl;
+    // std::cout << "temp: " << temp.toString() << std::endl;
 
     temp = temp - target;
     count[temp.toString()]++;
-    std::cout << "temp: " << temp.toString() << std::endl;
-    std::cout << "count[temp.toString()]: " << count[temp.toString()] << std::endl;
+    // std::cout << "temp: " << temp.toString() << std::endl;
+    // std::cout << "count[temp.toString()]: " << count[temp.toString()] << std::endl;
     
     for (long long i = 1; i < n; i++) {
         std::getline(file, line);
-        std::cout << "line: " << line << std::endl;
+        // std::cout << "line: " << line << std::endl;
         Arbit temp(line);
-        std::cout << "temp: " << temp.toString() << std::endl;
+        // std::cout << "temp: " << temp.toString() << std::endl;
         long long num_count = count[temp.toString()];
-        std::cout << "num_count: " << num_count << std::endl;
+        // std::cout << "num_count: " << num_count << std::endl;
         result += num_count;
         temp = temp - target;
         count[temp.toString()]++;
@@ -327,6 +327,13 @@ extern "C" {
     const char* count_pairs_file_c(const char* filename) {
         
         std::string output_str = count_pairs_file(filename);
-        return output_str.c_str();
+        // std::cout <<"In C "<< output_str << std::endl;
+        char* output = new char[output_str.size() + 1];
+        std::copy(output_str.begin(), output_str.end(), output);
+        output[output_str.size()] = '\0';
+        return output;
+        
+        
+
     }
 }
