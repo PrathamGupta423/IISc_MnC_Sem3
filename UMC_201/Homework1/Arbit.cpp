@@ -236,7 +236,7 @@ std::string count_pairs_file(const std::string& filename) {
     };
     if (!file.is_open()) {
         std::cerr << "Error opening file: " << filename << std::endl;
-        return "error";
+        return "-1";
     }
     std::string line;
 
@@ -270,6 +270,7 @@ std::string count_pairs_file(const std::string& filename) {
     file.close();
 
     return result.to_String();
+    // return result.second;
 }
 
 void test_count_pairs(){
@@ -313,7 +314,9 @@ void test_count_pairs(){
 }
 
 extern "C" {
-    std::string count_pairs_file_c(const char* filename) {
-        return count_pairs_file(filename);
+    const char* count_pairs_file_c(const char* filename) {
+        
+        std::string output_str = count_pairs_file(filename);
+        return output_str.c_str();
     }
 }

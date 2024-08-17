@@ -1,17 +1,14 @@
 # Modify this file to implement the count_pairs_file function
 # using ultra-large integers in C/C++.
-
-import time # For performance measurement
-
 import ctypes
-from ctypes import c_char_p, c_int
+from ctypes import c_char_p
 
 # Load the shared library
 lib = ctypes.CDLL('./libarbit.so')
 
 # Define the function prototype
 lib.count_pairs_file_c.argtypes = [c_char_p]
-lib.count_pairs_file_c.restype = ctypes.c_longlong
+lib.count_pairs_file_c.restype = ctypes.c_char_p
 
 def read_file(filename: str) -> tuple[list[int], int]:
     with open(filename) as file:
@@ -49,4 +46,5 @@ def test_count_pairs():
 
 
 def count_pairs_file(filename: str) -> int:
-    return lib.count_pairs_file_c(filename.encode('utf-8'))
+    result_str = lib.count_pairs_file_c(filename.encode('utf-8'))
+    return int(result_str.decode('utf-8'))

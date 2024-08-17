@@ -32,7 +32,7 @@ public:
 };
 
 class Output_Values {
-    private:
+    public:
         long long first;
         long long second;
 
@@ -52,5 +52,6 @@ std::string count_pairs(const std::vector<Arbit>&, const Arbit&);
 std::string count_pairs_file(const std::string& filename);
 void test_count_pairs();
 
+extern "C" const char* count_pairs_file_c(const char*);
 
 #endif // ARBIT_H
