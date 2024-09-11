@@ -73,6 +73,7 @@ if __name__ == "__main__":
 
     P0 = 1
     Tol = 10**-6
+    
     Sol = 0
 
     P , i , E = Faster_NewtonRaphson_with_error_list(P0 , Tol ,Sol, F, F1)
