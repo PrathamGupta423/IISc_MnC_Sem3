@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include "dict.h"
 
+void dfs(Node *, char *, int count);
+void _private_free_dict(Dict);
+
 // Create an empty Dict
 Dict make_dict() {
     Node *root = (Node *) malloc(sizeof(Node));
